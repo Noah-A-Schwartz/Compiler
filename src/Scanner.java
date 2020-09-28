@@ -1,4 +1,6 @@
 //Matt McNulty
+//Noah Schwartz
+//Jawad Aborshed
 
 import java.io.*;
 
@@ -38,7 +40,7 @@ public class Scanner {
             "div", "do", "else", "end",
             "file", "for", "function", "goto", "if",
             "in", "mod", "not", "of", "or", "procedure",
-            "record", "then", "type", "until", "while", "with"};
+            "record", "then", "type", "until", "while", "with", "is"};
 
     //Determines the token type of current lex
     public static String lookUp(char ch) throws IOException {

@@ -2,7 +2,7 @@ procedure Main is
     a : Integer;
     b : Integer;
 begin
-	a := 244;
-	b := 835;
+    a := 244;
+    b := 835;
     sum := a + b;
 end;

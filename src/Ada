@@ -1,4 +1,4 @@
-
+procedure Main is
     a : Integer;
     b : Integer;
 begin
