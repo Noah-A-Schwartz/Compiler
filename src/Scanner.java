@@ -1,14 +1,11 @@
-
-
-
-import org.jetbrains.annotations.NotNull;
+//Matt McNulty
 
 import java.io.*;
 
 import java.nio.charset.StandardCharsets;
 
 
-//This Scanner implements a small subset of the PASCAL language. It cam recgonize arithmetic operations and identifiers/declerations and keywords
+//This Scanner implements a small subset of the PASCAL language. It cam recognize arithmetic operations and identifiers/declarations and keywords
 public class Scanner {
 
     //static variables of Scanner class
@@ -37,13 +34,11 @@ public class Scanner {
     public final static String LETTER = "LETTER";
     public final static String UNKNOWN = "UNKNOWN";
     public static final String[] KEYWORDS = {
-            "and", "array", "begin", "case", "const",
-            "div", "do", "downto", "else", "end",
+            "and", "array", "begin", "case", "constant",
+            "div", "do", "else", "end",
             "file", "for", "function", "goto", "if",
-            "in", "label", "mod", "nil", "not",
-            "of", "or", "packed", "procedure", "program",
-            "record", "repeat", "set", "then", "to",
-            "type", "until", "var", "while", "with"};
+            "in", "mod", "not", "of", "or", "procedure",
+            "record", "then", "type", "until", "while", "with"};
 
     //Determines the token type of current lex
     public static String lookUp(char ch) throws IOException {
@@ -83,8 +78,7 @@ public class Scanner {
                 nextToken = MULT;
                 break;
 
-            //This calls add char a second time to get the = after it. (although this would need a work around if i want to add in other tokens like variable types decleration Since the colon in that case is not followed by an =.
-            //Also, just realized all token in PASCAL are separated by spaces, so I could use that to improve this(not enough time now)
+            //This calls add char a second time to get the = after it. (although this would need a work around if i want to add in other tokens like variable types declaration Since the colon in that case is not followed by an =.
             case ':':
                 addChar();
                 getChar();
@@ -109,7 +103,7 @@ public class Scanner {
     //Adds the next char to the lexeme
     public static void addChar() {
         if (lexLen <= 98) {
-            //Once char is added to the the lexem, increase length by 1. then set thhat index to empty.
+            //Once char is added to the lexeme, increase length by 1. then set that index to empty.
             lexeme[lexLen++] = nextChar;
             lexeme[lexLen] = 0;
         } else System.out.println("Lexeme is too long!");
@@ -129,7 +123,7 @@ public class Scanner {
                 charClass = LETTER;
             else if (Character.isDigit(nextChar))
                 charClass = DIGIT;
-                //assignment class since := is the assignment token is PASCAL
+                //assignment class since := is the assignment token in Ada
             else if (nextChar == '=' || nextChar == ':')
                 charClass = ASSIGN;
                 //Unknown Class
@@ -139,13 +133,13 @@ public class Scanner {
 
     //Lexical Analyzer. Works for arithmetic Expressions and assignments and Keywords
     public static String Lex() throws IOException {
-        //Start of new Lexem so reset array index to 0
+        //Start of new Lexeme so reset array index to 0
         lexLen = 0;
         //Move Read to nonwhitespace
         getNonBlank();
 
         //Add to lexeme based on what the class of the current class of the char is
-        //Add char adds to the lexem, then does get char and checks its class
+        //Add char adds to the lexeme, then does get char and checks its class
         switch (charClass) {
             case LETTER:
                 addChar();
@@ -208,8 +202,8 @@ public class Scanner {
             getChar();
     }
 
-    //Simply checks if a lexem matches any of the keywords once it is complete.
-    public static boolean isKeyword(char @NotNull [] lexeme) {
+    //Simply checks if a lexeme matches any of the keywords once it is complete.
+    public static boolean isKeyword(char [] lexeme) {
         String temp = "";
         for (char c : lexeme) {
             if (!Character.isLetter(c))
@@ -229,8 +223,8 @@ class Main {
     public static void main(String[] args) throws IOException {
         //Create new BufferReader from file
         try {
-            //This path might not work for you, but was the only way I could get it to run
-            File file = new File("src\\Pascal.txt");
+
+            File file = new File("src\\Ada");
             Scanner.buffer = new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(file),
@@ -248,4 +242,5 @@ class Main {
 
     }
 }
+
 
